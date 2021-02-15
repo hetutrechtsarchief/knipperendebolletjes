@@ -12,7 +12,7 @@ function TrefwoordByObjectNr(objectnr)
   cnnSearch.Open "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & strDBPath & ";"
 
   StrSQL = "SELECT * FROM tabelobject"
-  StrSQL = StrSQL & " Where Objectnr = '" & objectnr  & "'"
+  StrSQL = StrSQL & " Where Objectnr = '" & objectnr  & "' or kadnr1821 like '%" & objectnr & "%'"  ' dit is geen nette oplossing
   StrSQL = StrSQL & " order by Objectnr"
 
   Set rstSearch = Server.CreateObject("ADODB.Recordset")

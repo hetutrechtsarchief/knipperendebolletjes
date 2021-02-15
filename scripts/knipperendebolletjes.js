@@ -6,12 +6,14 @@ GNU General Public License v3.0
 */
 
 document.addEventListener("DOMContentLoaded", function(e) {
-  const queryObjNr = getParams(location.search).objectnr;
+  const queryObjNr = getParams(location.search).objectnr;   //dit kan objectnr zijn of een kadnr. objectnr gaat voor.
+  // console.log("queryObjNr",queryObjNr,location);
 
   const areas = document.getElementsByTagName("area");
+  // console.log("areas.length",areas.length);
   for(let i = 0; i < areas.length; i++) {
     const area = areas.item(i);
-    const areaObjNr = getParams(area.href).Idnr;
+    const areaObjNr = getParams(area.href).Idnr || getParams(area.href).objectnummer || getParams(area.href).kadnr; 
 
     if (queryObjNr && queryObjNr === areaObjNr && !area.hasAttribute("data-nodot")) {
       const areaCoords = area.coords;

@@ -3,16 +3,26 @@
 volgnummer = Request.QueryString("volgnummer")
 objectnr = Request.QueryString("objectnr")
 trefwoord = Request.QueryString("Trefwoord") ' lees trefwoord indien meegegeven
-if objectnr<>"" then trefwoord = TrefwoordByObjectNr(objectnr) ' if objectnr dan vraag trefwoord op
-if trefwoord="" then response.end() ' nog steeds geen trefwoord? dan script afbreken
+
+if objectnr<>"" then
+    trefwoord = TrefwoordByObjectNr(objectnr) ' if objectnr dan vraag trefwoord op. objectnr kan een Ob..n zijn of een kadasternummer..
+end if
+
+if trefwoord="" then 
+    response.write("trefwoord niet gevonden. objectnr=" + objectnr)
+    response.end() ' nog steeds geen trefwoord? dan script afbreken
+end if
 
 url = Request.ServerVariables("SCRIPT_NAME")
 url = Replace(url, "-Knipper.asp", "-links.htm")
-url = Replace(url, "-knipper.asp", "-links.htm")  'todo: case insensitive replace
+url = Replace(url, "-knipper.asp", "-links.htm")
 url = Replace(url, "-iframe-opvragen.asp", "-links.htm")
 url = Replace(url, "Zoekplaat-", "Zplaat")
 if objectnr<>"" then url = url & "?objectnr=" & objectnr
 
+
+' response.write(url)
+' response.end()
 
 %>
 
